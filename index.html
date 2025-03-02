@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shoaib Hussain Khan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 320px;
+            height: 420px;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .front, .inside {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            backface-visibility: hidden;
+            transition: transform 0.6s ease-in-out;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .front {
+            transform: rotateY(0);
+        }
+
+        .inside {
+            transform: rotateY(180deg);
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        img {
+            width: 80px;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 60px;
+            background: red;
+            border-radius: 50%;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                width: 95%;
+                height: 400px;
+            }
+            .balloon {
+                width: 30px;
+                height: 50px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+                height: 380px;
+            }
+            h1, h2 {
+                font-size: 18px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .balloon {
+                width: 25px;
+                height: 45px;
+            }
+            button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" onclick="flipCard()">
+        <div class="front">
+            <h1 style="color: #ff4081;">Happy Birthday Shoaib Hussain!</h1>
+            <img src="c.jpeg" alt="Birthday Cake">
+            <p>Wishing you a day filled with love, joy, and happiness! 🎉🎂</p>
+            <button onclick="openCard(event)">Open Card</button>
+        </div>
+        <div class="inside">
+            <h2 style="color: #ff4081;">Happy Birthday Shoaib Hussain! 🎶</h2>
+            <p>May your special day be as amazing as you are! 🎈</p>
+            <p>🎵 Happy Birthday to You, Happy Birthday Dear Shoaib Hussain 🎶</p>
+            <button onclick="closeCard(event)">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openCard(event) {
+            event.stopPropagation();
+            document.querySelector(".card .front").style.transform = "rotateY(180deg)";
+            document.querySelector(".card .inside").style.transform = "rotateY(0)";
+        }
+
+        function closeCard(event) {
+            event.stopPropagation();
+            document.querySelector(".card .front").style.transform = "rotateY(0)";
+            document.querySelector(".card .inside").style.transform = "rotateY(180deg)";
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            document.body.appendChild(balloon);
+
+            const colors = ["red", "blue", "yellow", "green", "pink", "purple"];
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 6000);
+        }
+
+        setInterval(createBalloon, 600);
+    </script>
+</body>
+</html>
